@@ -92,17 +92,24 @@ const cancelOrder = async (orderId: string) => {
 
 const addPriorityFee = async (orderId: string, amount: string) => {
   return sdkClient.Order.addPriorityFee(MARKET, orderId, amount);
-}
+};
+
+const retrieveOrder = async (orderId: string) => {
+  return sdkClient.Order.retrieve(MARKET, orderId);
+};
 
 const mainFunction = async () => {
   const quotaion = await createQuotation();
-  console.log(quotaion);
+  // console.log(quotaion);
 
   const order = await createOrder(quotaion);
-  console.log(order);
+  // console.log(order);
 
   const priorityFee = await addPriorityFee(order.id, '100');
-  console.log(priorityFee)
+  // console.log(priorityFee)
+
+  const retrievedOrder = await retrieveOrder(order.id);
+  console.log(retrievedOrder);
 
   // const cancelledOrder = await cancelOrder(order.id);
   // console.log(cancelledOrder);
