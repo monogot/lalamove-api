@@ -86,12 +86,19 @@ const createOrder = async (quotation: SDKClient.IQuotation) => {
   return sdkClient.Order.create(MARKET, orderPayload);
 };
 
+const cancelOrder = async (orderId: string) => {
+  return sdkClient.Order.cancel(MARKET, orderId);
+};
+
 const mainFunction = async () => {
   const quotaion = await createQuotation();
   console.log(quotaion);
 
   const order = await createOrder(quotaion);
   console.log(order);
+
+  const cancelledOrder = await cancelOrder(order.id);
+  console.log(cancelledOrder);
 };
 
 mainFunction();
