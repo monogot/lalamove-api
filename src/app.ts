@@ -90,6 +90,10 @@ const cancelOrder = async (orderId: string) => {
   return sdkClient.Order.cancel(MARKET, orderId);
 };
 
+const addPriorityFee = async (orderId: string, amount: string) => {
+  return sdkClient.Order.addPriorityFee(MARKET, orderId, amount);
+}
+
 const mainFunction = async () => {
   const quotaion = await createQuotation();
   console.log(quotaion);
@@ -97,8 +101,11 @@ const mainFunction = async () => {
   const order = await createOrder(quotaion);
   console.log(order);
 
-  const cancelledOrder = await cancelOrder(order.id);
-  console.log(cancelledOrder);
+  const priorityFee = await addPriorityFee(order.id, '100');
+  console.log(priorityFee)
+
+  // const cancelledOrder = await cancelOrder(order.id);
+  // console.log(cancelledOrder);
 };
 
 mainFunction();
